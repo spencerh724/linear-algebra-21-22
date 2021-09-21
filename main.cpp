@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -52,7 +53,8 @@ class Matrix{
             string ret = "";
             for(int i = 0; i < rows; i++){
                 for(int j = 0; j < columns; j++){
-                    ret.append(to_string(table[i][j]) + " ");
+                    double grab = table[i][j];
+                    ret.append(to_string(grab) + " ");
                 }
                 ret.append("\n");
             }
@@ -88,21 +90,17 @@ class Matrix{
 
 
 int main(){
+    cout << setprecision(1) << fixed;
+
     Matrix A("akdslfjfhfj"); //test matrix with values inputted in code
     cout << A.toString() << endl;
     A.RREF();
     cout << A.toString() << endl;
 
-    Matrix B(3, 3);
+    Matrix B(2, 5);
     cout << B.toString() << endl;
     B.RREF();
     cout << B.toString() << endl;
-    
-    /*
-        Tested B with:
-           1    1   1
-           4   -1  -6
-           2   -3   8
-    */
+
 
 }
