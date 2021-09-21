@@ -2,15 +2,15 @@
 
 using namespace std;
 
-class Matrix3x4{
+class Matrix{
     public:
         int rows;
         int columns;
         double **table;
 
-        Matrix3x4(){
-            rows = 3;
-            columns = 4;
+        Matrix(int r, int c){
+            rows = r;
+            columns = c;
             table = new double*[rows];
             for(int i = 0; i < rows; i++){
                 table[i] = new double[columns];
@@ -25,7 +25,8 @@ class Matrix3x4{
             cout << endl;
         }
 
-        Matrix3x4(string s){
+        Matrix(string s){
+            //this constructor is for a specific test matrix
             rows = 3;
             columns = 4;
             table = new double*[rows];
@@ -71,79 +72,37 @@ class Matrix3x4{
         }
 
         void RREF(){
-            /*
-            for(int i = 0; i < columns; i++){
+            int m = (rows==columns) ? rows-1:rows;
+            for(int i = 0; i < m ; i++){
                 scaleRow(i, 1.0/table[i][i]);
+
                 for(int j = 0; j < rows; j++){
                     if(j != i){
                         addRow(-(table[j][i]), i, j);
                     }
                 }
             }
-            */
+            return;
         }
 };
 
 
 int main(){
-    Matrix3x4 A("akdslfjfhfj");
+    Matrix A("akdslfjfhfj"); //test matrix with values inputted in code
+    cout << A.toString() << endl;
+    A.RREF();
     cout << A.toString() << endl;
 
-    A.scaleRow(0, 1.0/A.table[0][0]);
-    cout << "cout << A.toString() << endl;" << endl;
-    cout << A.toString() << endl;
-
-    A.addRow(-(A.table[1][0]), 0, 1);
-    cout << "A.addRow(-(A.table[1][0]), 0, 1);" << endl;
-    cout << A.toString() << endl;
-
-    A.addRow(-(A.table[2][0]), 0, 2);
-    cout << "A.addRow(-(A.table[2][0]), 0, 2);" << endl;
-    cout << A.toString() << endl;
-    //////////////////////////////////////////////
-    A.scaleRow(1, 1.0/A.table[1][1]);
-    cout << "A.scaleRow(1, 1.0/A.table[1][1]);" << endl;
-    cout << A.toString() << endl;
-
-    A.addRow(-(A.table[0][1]), 1, 0);
-    cout << "A.addRow(-(A.table[0][1]), 0, 1);" << endl;
-    cout << A.toString() << endl;
-
-    A.addRow(-(A.table[2][1]), 1, 2);
-    cout << "A.addRow(-(A.table[2][1]), 0, 2);" << endl;
-    cout << A.toString() << endl;
-    //////////////////////////////////////////////
-    A.scaleRow(2, 1.0/A.table[2][2]);
-    cout << "A.scaleRow(2, 1.0/A.table[2][2]);" << endl;
-    cout << A.toString() << endl;
-
-    A.addRow(-(A.table[0][2]), 2, 0);
-    cout << "A.addRow(-(A.table[0][3]), 2, 0);" << endl;
-    cout << A.toString() << endl;
-
-    A.addRow(-(A.table[1][2]), 2, 1);
-    cout << "A.addRow(-(A.table[1][3]), 2, 1);" << endl;
-    cout << A.toString() << endl;
-
+    Matrix B(3, 3);
+    cout << B.toString() << endl;
+    B.RREF();
+    cout << B.toString() << endl;
+    
+    /*
+        Tested B with:
+           1    1   1
+           4   -1  -6
+           2   -3   8
+    */
 
 }
-
-//    int rows;
-//    int columns;
-//
-//    cout << "rows, cols: ";
-//    cin >> rows >> cols;
-//
-//    int** table = new int*[rows];
-//    for(int i = 0; i < rows; i++){
-//        table[i] = new int[columns];
-//    }
-//
-//    //de-allocation
-//
-//    for(int i = 0; i < rows; i++){
-//        delete[]table[i];
-//        table[i] = NULL;
-//    }
-//    delete[] table;
-//    table = NULL;
