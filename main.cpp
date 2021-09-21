@@ -35,12 +35,24 @@ class Matrix3x4{
             }
             return ret;
         }
+    
+        void scaleRow(int r, double k){
+            for(int i = 0; i < columns; i++){
+                table[r][i] *= k;
+            }
+        }
 
+        void addRow(int k, int rA, int rB){
+            for(int i = 0; i < columns; i++){
+
+            }
+        }
 };
 
 
 int main(){
     Matrix3x4 A;
+    A.scaleRow(0, 0.5);
     cout << A.toString();
 
 }
